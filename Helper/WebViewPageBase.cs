@@ -82,6 +82,11 @@ public abstract class WebViewPageBase : Page
 
             if (!string.IsNullOrEmpty(e.Uri) && e.Uri != "about:blank")
             {
+                if (e.Uri.StartsWith("https://business.facebook.com/", StringComparison.OrdinalIgnoreCase))
+                {
+                    webViewControl.CoreWebView2.Navigate(e.Uri);
+                    return;
+                }
                 // There's a real URI → open an external browser
                 Process.Start(new ProcessStartInfo
                 {
